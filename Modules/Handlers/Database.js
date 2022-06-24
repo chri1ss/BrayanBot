@@ -39,14 +39,14 @@ module.exports = {
 
         if (!db) db = await module.exports.db;
         if (!tableName || !values) {
-            Utils.logWarning(`Not enough parameters passed in createTable function.`);
+            Utils.logWarning(`Nicht genügend Parameter in der Funktion createTable übergeben.`);
         } else if (db && tableName && values) {
             try {
                 db.prepare(`CREATE TABLE IF NOT EXISTS ${tableName} (${values})`).run();
                 if (config.Settings.DevMode)
-                    Utils.logInfo(`${chalk.bold(tableName)} Table Ready. (${chalk.bold(db.name.replace("Database/", ""))})`);
+                    Utils.logInfo(`${chalk.bold(tableName)} Tabelle Bereit. (${chalk.bold(db.name.replace("Database/", ""))})`);
             } catch (err) {
-                Utils.logWarning(`An error occured while setting up database. (${tableName})`);
+                Utils.logWarning(`Beim Einrichten der Datenbank ist ein Fehler aufgetreten. (${tableName})`);
                 reject(err);
             }
         }
