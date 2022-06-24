@@ -11,13 +11,13 @@ let db;
 module.exports = async (bot, interaction) => {
     if(!db) db = await Utils.database.getDatabase();
     const { config, lang, SlashCmds } = bot;
-    // Slash Command Executing
+    // Slash-Befehl wird ausgeführt
     if (interaction.isCommand()) {
         const command = SlashCmds.find((x) => x.commandData.SlashCommand.Data.Name.toLowerCase() == interaction.commandName.toLowerCase());
         let permissions = [], ignoreCooldown = false;
 
         if (command && typeof command.runSlash == "function") {
-            // Command Cooldown Check
+            // Kommando Abklingzeitprüfung
             if (command.commandData.Cooldown && !interaction.user.bot) {
                 const ignoreUserCheck = bot.commands.IgnoredCooldown.Users ? bot.commands.IgnoredCooldown.Users.includes(x => x.id == interaction.user.id
                     || x.tag.toLowerCase() == interaction.user.tag.toLowerCase()
@@ -52,7 +52,7 @@ module.exports = async (bot, interaction) => {
                 }
             }
 
-            // Command Channel Check
+            // Überprüfung des Befehlskanal
             if (command.commandData.AllowedChannels) {
                 if (typeof command.commandData.AllowedChannels == "string")
                     command.commandData.AllowedChannels = [command.commandData.AllowedChannels];
@@ -76,7 +76,7 @@ module.exports = async (bot, interaction) => {
                 }
             };
 
-            // Command Permission Check
+            // Befehl Berechtigungsprüfung
             if (command.commandData.Permission) {
                 if (typeof command.commandData.Permission == "string")
                     command.commandData.Permission = [command.commandData.Permission];
