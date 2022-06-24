@@ -18,10 +18,10 @@ EndPoints:
     EndPoint: "/download"
     File: "assets/download.txt"
 Ratelimit: 
-  # It's recommended to keep this enabled.
+  # Es wird empfohlen, diese Option zu aktivieren.
   Enabled: true
-  # Max Requests can be made per 1 minute
+  # Maximal möglicher Abruf pro 1 Minute
   MaxRequests: 1
-  # IPs included will bypass Rate Limiting
+  # Enthaltene IPs werden von der Ratenbegrenzung ausgenommen
   BypassIPs:
     - "127.0.0.1" # http://localhost/ | http://127.0.0.1/
