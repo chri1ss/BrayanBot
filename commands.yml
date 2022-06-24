@@ -2,12 +2,12 @@ DisabledCommands: []
 
 IgnoredCooldown:
   Users:
-    - "Zorino#1110"
+    - "Ƈhris#2111"
   Roles:
     - "Special"
 General:
   Help:
-    Description: "Displays all Bot Commands"
+    Description: "Zeige alle Botbefehle"
     Usage: "help"
     Aliases: []
     Permission:
@@ -19,13 +19,13 @@ General:
       Enabled: true
       Data:
         Name: help
-        Description: "Displays all Bot Commands"
+        Description: "Zeige alle Botbefehle"
         Options:
           - Type: "string"
             Name: "command"
-            Description: "Command for info"
+            Description: "Befehl für Infos"
   Ping:
-    Description: "Displays Bot Pings"
+    Description: "Zeigt Bot Pings an"
     Usage: "ping"
     Aliases: []
     Permission:
@@ -37,9 +37,9 @@ General:
       Enabled: true
       Data:
         Name: ping
-        Description: "Displays Bot Pings"
+        Description: "Zeigt Bot Pings an"
   Uptime:
-    Description: "View Your Bot's Current Uptime"
+    Description: "Aktuelle Laufzeit Ihres Bots anzeigen"
     Usage: "uptime"
     Aliases: []
     Permission:
@@ -51,9 +51,9 @@ General:
       Enabled: true
       Data:
         Name: uptime
-        Description: "View Your Bot's Current Uptime"
+        Description: "Aktuelle Laufzeit Ihres Bots anzeigen"
   ServerInfo:
-    Description: "View Server's Information"
+    Description: "Server-Informationen anzeigen"
     Usage: "serverinfo"
     Aliases:
       - "guildinfo"
@@ -66,9 +66,9 @@ General:
       Enabled: true
       Data:
         Name: serverinfo
-        Description: "View Server's Information"
+        Description: "Server-Informationen anzeigen"
   UserInfo:
-    Description: "View User's Information"
+    Description: "Benutzerinformation anzeigen"
     Usage: "userinfo"
     Aliases:
       - "memberinfo"
@@ -81,13 +81,13 @@ General:
       Enabled: true
       Data:
         Name: userinfo
-        Description: "View User's Information"
+        Description: "Benutzerinformation anzeigen"
         Options:
           - Type: "User"
             Name: "target"
             Description: "User Mention"
   Avatar:
-    Description: "Displays user's avatar"
+    Description: "Zeigt den Avatar des Benutzers"
     Usage: "avatar <user>"
     Aliases:
       - "av"
@@ -100,25 +100,25 @@ General:
       Enabled: true
       Data:
         Name: avatar
-        Description: "Displays user's avatar"
+        Description: "Zeigt den Avatar des Benutzers"
         Options:
           - Type: "User"
             Name: "target"
             Description: "User Mention"
 Admin:
   Eval:
-    Description: "Runs JavaScript code"
+    Description: "Führt JavaScript Code aus"
     Usage: "eval <code>"
     Aliases: []
     Permission:
-      - "Zorino#1110"
+      - "Ƈhris#2111"
     AllowedChannels: false
     Cooldown: false
     SlashCommand:
       Enabled: true
       Data:
         Name: eval
-        Description: "Runs JavaScript code"
+        Description: "Führt JavaScript Code aus"
         Options:
           - Type: "String"
             Name: "code"
