@@ -2,17 +2,17 @@
 
 clear >$(tty)
 
-# Check if the script is ran as root. Throw hands if it is.
+# Prüfen Sie, ob das Skript als root ausgeführt wird. Wenn ja, verwerfen Sie es.
 if [ "$EUID" -e 0 ]; then
-	echo -e "\e[31m - Please do not run this script as root.\e[0m"
+	echo -e "\e[31m - Bitte führen Sie dieses Skript nicht als root aus.\e[0m"
 	exit 3
 fi
 
-echo "Installing BrayanBot for Linux..."
+echo "Installation von BrayanBot für Linux..."
 
 
 npm install @tycrek/log fs-extra prompt js-yaml
-# Ensure that ./Modules, ./Commands and ./Events exist.
+# Stellen Sie sicher, dass ./Modules, ./Commands und . /Events vorhanden sind.
 mkdir -p ./Modules
 mkdir -p ./Commands
 mkdir -p ./Events
@@ -20,7 +20,7 @@ mkdir -p ./Addons
 mkdir -p ./Addon_Configs
 
 
-# Ensure that config.yml, lang.yml and commands.yml exist
+# Sicherstellen, dass config.yml, lang.yml und commands.yml vorhanden sind
 for value in config.yml lang.yml commands.yml
 do
 	if [ ! -f $value ]; then
@@ -28,22 +28,22 @@ do
 	fi
 done
 
-# Wait for a confirmation
-echo "This script will run docker-compose. Do you wish to continue? (Press CTRL+C to continue)"
-read -n 1 -s -r -p "Press any key to continue..."
+# Auf eine Bestätigung warten
+echo "Dieses Skript wird docker-compose ausführen. Möchten Sie fortfahren? (Drücken Sie CTRL+C, um fortzufahren)"
+read -n 1 -s -r -p "Drücken Sie eine beliebige Taste, um fortzufahren..."
 
-echo Setting up...
+echo Einrichten...
 
-# Builds the container (as per Dockerfile) and starts the container
+# Baut den Container (gemäß Dockerfile) und startet den Container
 docker-compose up -d && \
 
-# Run setup within the container
+# Setup innerhalb des Containers ausführen
 docker-compose exec brayanbot npm run setup && \
 
-# Restart the container when complete
+# Nach Abschluss den Container neu starten
 docker-compose restart && \
 
 # Done!
-echo "BrayanBot is now installed for Linux."
-echo "Run the following to view logs:"
+echo "BrayanBot ist jetzt für Linux installiert."
+echo "Führen Sie Folgendes aus, um die Protokolle anzuzeigen:"
 echo "$ docker-compose logs -f --tail=50 --no-log-prefix brayanbot"
