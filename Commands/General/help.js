@@ -43,7 +43,7 @@ module.exports.run = async (bot, message, args, config) => {
                     {
                         Title: "💁‍♂️ Help Menu",
                         Description:
-                            "> User `-help <command>` to view more information about command",
+                            "> User `-help <command>`, um weitere Informationen über den Befehl anzuzeigen",
                         Fields: fields,
                         Footer: "{user-tag}",
                         FooterTag: "{user-tag}",
@@ -126,7 +126,7 @@ module.exports.runSlash = async (bot, interaction) => {
                     {
                         Title: "💁‍♂️ Help Menu",
                         Description:
-                            "> User `-help <command>` to view more information about command",
+                            "> User `-help <command>`, um weitere Informationen über den Befehl anzuzeigen",
                         Fields: fields,
                         Footer: "{user-tag}",
                         FooterTag: "{user-tag}",
