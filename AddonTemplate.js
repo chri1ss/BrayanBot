@@ -16,5 +16,5 @@ module.exports = {
 };
 
 module.exports.run = async (bot, addonConfig) => {
-    // Your code goes here
+    // Ihr Code kommt hierher
 }
