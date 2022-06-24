@@ -8,7 +8,7 @@ const installNodeModules = async () => new Promise(async (resolve, reject) => {
                 ...Object.keys(package.optionalDependencies)
             ];
 
-        console.log(`\x1b[34m[Module Installer]`, `\x1b[37mInstalling ${`\x1b[1m${modules.length}\x1b[0m`}\x1b[37m modules, Please wait while we install modules. This may take a few minutes.`);
+        console.log(`\x1b[34m[Module Installer]`, `\x1b[37mInstalling ${`\x1b[1m${modules.length}\x1b[0m`}\x1b[37m modules, Bitte warten Sie, während wir die Module installieren. Dies kann ein paar Minuten dauern.`);
         let data = spawn(process.platform == "win32" ? "npm.cmd" : "npm", ["install", ...modules]);
         data.stdout.on("data", (data) => {
             showOutput ? console.log(`\x1b[34m[Module Installer: stdout]\x1b[0m`, data.toString().trim()) : "";
@@ -17,7 +17,7 @@ const installNodeModules = async () => new Promise(async (resolve, reject) => {
             showOutput ? console.log(`\x1b[34m[Module Installer: stderr]\x1b[0m`, data.toString().trim()) : ""
         })
         data.on("exit", (code) => {
-            console.log(`\x1b[34m[Module Installer]`, `\x1b[37m${`\x1b[1m${modules.length}\x1b[0m`}\x1b[37m were installed. `);
+            console.log(`\x1b[34m[Module Installer]`, `\x1b[37m${`\x1b[1m${modules.length}\x1b[0m`}\x1b[37m wurden installiert. `);
             resolve(code);
         })
     } else resolve();
@@ -29,10 +29,10 @@ installNodeModules().then(async () => {
             require.resolve("console-stamp");
         } catch (e) {
             if (require("fs").existsSync("node_modules")) {
-                console.log(`\x1b[34m[Module Installer]`, `\x1b[37mModules installed, please restart the bot.`);
+                console.log(`\x1b[34m[Module Installer]`, `\x1b[37mModule installiert, bitte starten Sie den Bot neu.`);
                 process.exit(0);
             } else {
-                console.log(`\x1b[34m[Module Installer]`, `\x1b[37mModules are not installed.`);
+                console.log(`\x1b[34m[Module Installer]`, `\x1b[37mEs sind keine Module installiert.`);
                 process.exit(0);
             }
         }
@@ -60,5 +60,5 @@ installNodeModules().then(async () => {
 
     if (client.config.Settings.Token)
         client.login(client.config.Settings.Token);
-    else return Utils.logError("An invalid token was provided.");
+    else return Utils.logError("Es wurde ein ungültiges Token angegeben.");
 });
