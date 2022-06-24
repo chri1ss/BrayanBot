@@ -23,17 +23,17 @@ function getConfirmSchema(description) {
 		properties: {
 			confirm: {
 				description,
-				type: 'string',
-				pattern: /^[y|n]/gim,
-				message: 'Must respond with either \'y\' or \'n\'',
-				required: true,
-				before: (value) => value.toLowerCase().startsWith('y')
+				"type": 'string',
+				"pattern": /^[y|n]/gim,
+				"message": 'Sie müssen entweder mit \'y\' oder \'n\' antworten',
+				"required": true,
+				"before": (value) => value.toLowerCase().startsWith('y')
 			}
 		}
 	};
 }
 
-// If directly called on the command line, run setup script
+// Bei direktem Aufruf in der Kommandozeile, Setup-Skript ausführen
 function doSetup() {
 	const path = (...paths) => require('path').join(process.cwd(), ...paths);
 	const TLog = require('@tycrek/log');
@@ -53,23 +53,23 @@ function doSetup() {
 	//	if (ex.code !== 'MODULE_NOT_FOUND' && !ex.toString().includes('Unexpected end')) log.error(ex);
 	//}
 
-	// Disabled the annoying "prompt: " prefix and removes colours
+	// Deaktiviert das lästige "prompt: " Präfix und entfernt Farben
 	prompt.message = '';
 	prompt.colors = false;
 	prompt.start();
 
-	// Schema for config setup
+	// Schema für die config installation
 	const setupSchema = {
 		properties: {
 			botToken: {
-				description: 'Your Discord Bot Token',
+				description: 'Dein Discord Bot Token',
 				type: 'string',
 				default: config.Settings.Token,
 				required: true,
-				message: 'You must input a valid Bot Token'
+				message: 'Du musst ein gültiges Bot-Token eingeben'
 			},
 			prefix: {
-				description: 'Your Bot Prefix',
+				description: 'Dein Bot-Präfix',
 				type: 'string',
 				default: config.Settings.Prefix,
 				//	pattern: /^[-_!]$/gim, // regex to limit prefix options
@@ -77,32 +77,32 @@ function doSetup() {
 				required: false,
 			},
 			storage: {
-				description: `Name of your storage file. (Example: ${config.Settings.Storage})`,
+				description: `Name der Ablage-Datei. (Beispiel: ${config.Settings.Storage})`,
 				type: 'string',
 				default: config.Settings.Storage,
 				// pattern: ^.*\.(db)$,
 				require: false,
 			},
 			brandName: {
-				description: `Your brand/server name used by {brand-name} variable(in embeds). (Example: ${config.Branding.Name})`,
+				description: `Ihr Markenname/Servername verwendet von {brand-name} variable(in embeds). (Beispiel: ${config.Branding.Name})`,
 				type: 'string',
 				default: config.Branding.Name,
 				required: false
 			},
 			brandlogo: {
-				description: `Your brand/server logo used by {brand-logo} variable(in embeds). (Example: ${config.Branding.Logo})`,
+				description: `Ihr Marken-/Serverlogo wird verwendet von {brand-logo} variable(in embeds). (Beispiel: ${config.Branding.Logo})`,
 				type: 'string',
 				default: config.Branding.Logo,
 				required: false
 			},
 			brandlink: {
-				description: `Your brand/server link used by {brand-link} variable(in embeds). (Example: ${config.Branding.Link})`,
+				description: `Ihr Marken-/Serverlink wird verwendet von {brand-link} variable(in embeds). (Beispiel: ${config.Branding.Link})`,
 				type: 'string',
 				default: config.Branding.Link,
 				required: false
 			},
 			color: {
-				description: `Color for your embeds. (Example: ${config.Embeds.Color})`,
+				description: `Farbe für Ihre Einbettungen (Beispiel: ${config.Embeds.Color})`,
 				type: 'string',
 				default: config.Embeds.Color,
 				required: false
@@ -110,8 +110,8 @@ function doSetup() {
 		}
 	};
 
-	// Schema for confirm prompt. User must enter 'y' or 'n' (case-insensitive)
-	const confirmPrompt = getConfirmSchema('\nIs the above information correct? (y/n)');
+	// Schema für die Sicherheitsabfrage. Der Benutzer muss "y" oder "n" eingeben (Groß- und Kleinschreibung wird nicht berücksichtigt)
+	const confirmPrompt = getConfirmSchema('\nSind die oben genannten Informationen korrekt? (y/n)');
 
 	log.blank().blank().blank().blank()
 		.info('[=== BrayanBot Setup ===]').blank();
@@ -119,17 +119,17 @@ function doSetup() {
 	prompt.get(setupSchema)
 		.then((r) => results = r) // skipcq: JS-0086
 
-		// Verify information is correct
+		// Prüfen Sie, ob die Informationen korrekt sind.
 		.then(() => log
 			.blank()
-			.info('Please verify your information', '\n'.concat(Object.entries(results).map(([setting, value]) => `${'            '}${log.chalk.dim.gray('-->')} ${log.chalk.bold.white(`${setting}:`)} ${log.chalk.white(value)}`).join('\n')))
+			.info('Bitte überprüfen Sie Ihre Angaben', '\n'.concat(Object.entries(results).map(([setting, value]) => `${'            '}${log.chalk.dim.gray('-->')} ${log.chalk.bold.white(`${setting}:`)} ${log.chalk.white(value)}`).join('\n')))
 			.blank())
 
-		// Confirm
+		// Bestätigen
 		.then(() => prompt.get(confirmPrompt))
-		.then(({ confirm }) => (confirm ? fsExtra.writeJson(path('config.json'), results, { spaces: 4 }) : log.error('Setup aborted').callback(process.exit, 1)))
+		.then(({ confirm }) => (confirm ? fsExtra.writeJson(path('config.json'), results, { spaces: 4 }) : log.error('Setup abgebrochen').callback(process.exit, 1)))
 
-		// Convert config.json to config.yml, confirm and exit
+		// config.json in config.yml umwandeln, bestätigen und beenden
 		.then(() => {
 		const { promises: fs } = require("fs")
 		const yaml = require('js-yaml');
@@ -141,7 +141,7 @@ function doSetup() {
 				let doc = yaml.load(configJson)
 				let configYaml = yaml.dump(doc)
 				await fs.writeFile("./config.yaml", configYaml, "utf-8")
-				.then(() => log.blank().success('Setup complete').callback(() => process.exit(0)))
+				.then(() => log.blank().success('Setup komplett').callback(() => process.exit(0)))
 				.catch((err) => log.blank().error(err).callback(() => process.exit(1)))
 			} catch (error) {
 				console.log(error)
@@ -155,8 +155,8 @@ module.exports = {
 	config
 };
 
-// If called on the command line, run the setup.
-// Using this makes sure setup is not run when imported by another file
+// Bei einem Aufruf über die Befehlszeile wird das Setup ausgeführt.
+// Auf diese Weise wird sichergestellt, dass das Setup nicht ausgeführt wird, wenn es von einer anderen Datei importiert wird
 if (require.main === module) {
 	doSetup();
 }
