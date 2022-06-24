@@ -20,7 +20,7 @@ module.exports = {
 module.exports.run = async (bot, message, args, config) => {
     message.channel.send({
         embeds: [
-            { title: "Calculating ping.." },
+            { title: "Ping wird berechnet.." },
         ],
     }).then(async (msg) => {
         const ping = msg.createdTimestamp - message.createdTimestamp;
@@ -45,7 +45,7 @@ module.exports.runSlash = async (bot, interaction) => {
     interaction.reply({
             embeds: [
                 {
-                    title: "Calculating ping..",
+                    title: "Ping wird berechnet..",
                 },
             ],
             ephemeral: true,
