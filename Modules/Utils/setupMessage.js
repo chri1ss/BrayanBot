@@ -81,7 +81,7 @@ module.exports = (settings, ephemeral = false, tts = false, disableMentions = fa
         Utils = require("../Utils");
 
     if (!settings || !settings.configPath)
-        return Utils.logWarning(`[Utils] [setupMessage] Invalid ${chalk.bold("configPath")}. Got undefined`)
+        return Utils.logWarning(`[Utils] [setupMessage] Ungültige ${chalk.bold("configPath")}. Wurde nicht definiert`)
 
     let Variables = [
         { searchFor: /{brand-name}/g, replaceWith: config.Branding.Name },
@@ -212,7 +212,7 @@ module.exports = (settings, ephemeral = false, tts = false, disableMentions = fa
 
             if (!Title && !Author && !Description && !Fields) {
                 embed.setTitle("Error")
-                embed.setDescription("Atleast 1 value is requried to build a embed");
+                embed.setDescription("Mindestens 1 Wert ist erforderlich, um eine Einbettung zu erstellen");
 
                 messageData.embeds.push(embed);
             } else {
@@ -319,9 +319,9 @@ module.exports = (settings, ephemeral = false, tts = false, disableMentions = fa
                             if (Style.toLowerCase() == "random" || validButtonStyles.includes(Style.toLowerCase())) {
                                 if (Style.toLowerCase() == "link") {
                                     if (!Link) {
-                                        Utils.logError(`[Utils] [setupMessage] A link is required for button to work.`);
+                                        Utils.logError(`[Utils] [setupMessage] Ein Link ist erforderlich, damit die Schaltfläche funktioniert.`);
                                     } else if (!Label && !Emoji) {
-                                        Utils.logError(`[Utils] [setupMessage] Label or Emoji is required for button to work.`);
+                                        Utils.logError(`[Utils] [setupMessage] Eine Beschriftung oder ein Emoji ist erforderlich, damit die Schaltfläche funktioniert.`);
                                     } else {
                                         let button = new MessageButton()
                                             .setStyle("LINK").setURL(Link);
@@ -331,9 +331,9 @@ module.exports = (settings, ephemeral = false, tts = false, disableMentions = fa
                                         rows[i].addComponents([button]);
                                     }
                                 } else if (!CustomID) {
-                                    Utils.logError(`[Utils] [setupMessage] CustomID is required for button to work.`);
+                                    Utils.logError(`[Utils] [setupMessage] CustomID ist erforderlich, damit die Schaltfläche funktioniert.`);
                                 } else if (!Label && !Emoji) {
-                                    Utils.logError(`[Utils] [setupMessage] Label or Emoji is required for button to work.`);
+                                    Utils.logError(`[Utils] [setupMessage] Eine Beschriftung oder ein Emoji ist erforderlich, damit die Schaltfläche funktioniert.`);
                                 } else {
                                     let button =
                                         new MessageButton().setCustomId(CustomID);
@@ -355,15 +355,15 @@ module.exports = (settings, ephemeral = false, tts = false, disableMentions = fa
                                     rows[i].addComponents([button]);
                                 }
                             } else {
-                                Utils.logError(`[Utils] [setupMessage] Invalid Button Style: ${Style}`);
+                                Utils.logError(`[Utils] [setupMessage] Unzulässiger Button-Stil: ${Style}`);
                             }
                             break;
                         }
                         case 'selectmenu': {
                             if (!CustomID) {
-                                Utils.logError(`[Utils] [setupMessage] CustomID is required for SelectMenu to work.`);
+                                Utils.logError(`[Utils] [setupMessage] CustomID ist erforderlich, damit SelectMenu funktioniert.`);
                             } else if (!Array.isArray(Options) || !Options[0]) {
-                                Utils.logError(`[Utils] [setupMessage] SelectMenu atleast needs 1 option to work.`);
+                                Utils.logError(`[Utils] [setupMessage] SelectMenu braucht mindestens 1 Option, um zu funktionieren.`);
                             } else {
                                 if (!MaxSelect) MaxSelect = 0;
                                 if (!MinSelect) MinSelect = 0;
@@ -393,7 +393,7 @@ module.exports = (settings, ephemeral = false, tts = false, disableMentions = fa
                         }
 
                         default: {
-                            Utils.logError(`[Utils] [setupMessage] Invalid Component Type`);
+                            Utils.logError(`[Utils] [setupMessage] Unzulässiger Komponententyp`);
                             break;
                         }
                     }
@@ -422,7 +422,7 @@ module.exports = (settings, ephemeral = false, tts = false, disableMentions = fa
             })
 
             if (!File) {
-                Utils.logError(`[Utils] [setupMessage] File is required for file to work.`);
+                Utils.logError(`[Utils] [setupMessage] Datei ist erforderlich, damit die Datei funktioniert.`);
             }
 
             if (Name) messageData.files.push({
