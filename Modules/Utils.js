@@ -58,7 +58,7 @@ module.exports = {
             replaceWith: module.exports.getUserBadges(user).join(", "),
         }];
 
-        if (!user) module.exports.logError(`[Utils] [userVariables] Invalid input for ${chalk.bold("user")}.`);
+        if (!user) module.exports.logError(`[Utils] [userVariables] Ungültige Eingabe für ${chalk.bold("user")}.`);
 
         return returnObject;
     },
@@ -102,7 +102,7 @@ module.exports = {
             replaceWith: member.roles.cache.filter(x => x.id != member.guild.roles.everyone.id).map((r) => `<@&${r.id}>`).join(", "),
         }];
 
-        if (!member) module.exports.logError(`[Utils] [memberVariables] Invalid input for ${chalk.bold("member")}.`);
+        if (!member) module.exports.logError(`[Utils] [memberVariables] Ungültige Eingabe für ${chalk.bold("member")}.`);
 
         return returnObject;
     },
@@ -132,7 +132,7 @@ module.exports = {
             replaceWith: `<t:${Math.floor(channel.createdTimestamp / 1000)}:D>`,
         }]
 
-        if (!channel) module.exports.logError(`[Utils] [channelVariables] Invalid input for ${chalk.bold("channel")}.`);
+        if (!channel) module.exports.logError(`[Utils] [channelVariables] Ungültige Eingabe für ${chalk.bold("channel")}.`);
 
         return returnObject;
     },
@@ -171,7 +171,7 @@ module.exports = {
             replaceWith: role.iconURL() || "https://cdn-icons-png.flaticon.com/512/2522/2522053.png",
         }]
 
-        if (!role) module.exports.logError(`[Utils] [roleVariables] Invalid input for ${chalk.bold("role")}.`);
+        if (!role) module.exports.logError(`[Utils] [roleVariables] Ungültige Eingabe für ${chalk.bold("role")}.`);
 
         return returnObject;
     },
@@ -203,7 +203,7 @@ module.exports = {
             replaceWith: bot.user.displayAvatarURL({ dynamic: true }),
         }]
 
-        if (!bot) module.exports.logError(`[Utils] [botVariables] Invalid input for ${chalk.bold("bot")}.`);
+        if (!bot) module.exports.logError(`[Utils] [botVariables] Ungültige Eingabe für ${chalk.bold("bot")}.`);
 
         return returnObject;
     },
@@ -214,7 +214,7 @@ module.exports = {
      */
     guildVariables: (guild, prefix) => {
         if (!guild) {
-            module.exports.logError(`[Utils] [guildVariables] Invalid input for ${chalk.bold("guild")}.`);
+            module.exports.logError(`[Utils] [guildVariables] Ungültige Eingabe für ${chalk.bold("guild")}.`);
             return [];
         } else return [{
             searchFor: new RegExp(`{${prefix || "guild"}-id}`, "g"),
@@ -284,8 +284,8 @@ module.exports = {
      * @returns {Discord.Channel | void}
      */
     findChannel: (name, guild, type = "GUILD_TEXT", notify = true) => {
-        if (!name) return module.exports.logError(`[Utils] [findChannel] Invalid input for channel ${chalk.bold(name)}.`);
-        if (!guild) return module.exports.logError(`[Utils] [findChannel] Invalid input for ${chalk.bold("guild")}.`);
+        if (!name) return module.exports.logError(`[Utils] [findChannel] Ungültige Eingabe für channel ${chalk.bold(name)}.`);
+        if (!guild) return module.exports.logError(`[Utils] [findChannel] Ungültige Eingabe für ${chalk.bold("guild")}.`);
         if (typeof name == "bigint" || typeof name == "number") name = name.toString();
 
         let returnObject = false;
@@ -294,7 +294,7 @@ module.exports = {
             && c.type.toLowerCase() === type.toLowerCase());
 
         if (channel) returnObject = channel;
-        else if (notify && !channel) module.exports.logError(`[Utils] [findChannel] ${chalk.bold(name)} was not found in the ${chalk.bold(guild.name)} guild`);
+        else if (notify && !channel) module.exports.logError(`[Utils] [findChannel] ${chalk.bold(name)} wurde nicht gefunden im ${chalk.bold(guild.name)} guild`);
 
         return returnObject;
     },
@@ -305,8 +305,8 @@ module.exports = {
      * @returns {Discord.Role | void}
      */
     findRole: (name, guild, notify = true) => {
-        if (!name) return module.exports.logError(`[Utils] [findRole] Invalid input for role name.`);
-        if (!guild) return module.exports.logError(`[Utils] [findRole] Invalid input for guild.`);
+        if (!name) return module.exports.logError(`[Utils] [findRole] Ungültige Eingabe für Rollenname.`);
+        if (!guild) return module.exports.logError(`[Utils] [findRole] Ungültige Eingabe für Gilde.`);
         if (typeof name == "bigint" || typeof name == "number") name = name.toString();
 
         let returnObject = false;
@@ -315,7 +315,7 @@ module.exports = {
             || r.id === name);
 
         if (role) returnObject = role;
-        else if (notify) module.exports.logError(`[Utils] [findRole] ${chalk.bold(name)} role was not found in ${chalk.bold(guild.name)} guild`);
+        else if (notify) module.exports.logError(`[Utils] [findRole] ${chalk.bold(name)} rolle wurde nicht gefunden in ${chalk.bold(guild.name)} guild`);
 
         return returnObject;
     },
@@ -326,15 +326,15 @@ module.exports = {
      * @returns {Discord.Guild | void}
      */
      findGuild: (name, client, notify = true) => {
-        if (!name) return module.exports.logError(`[Utils] [findGuild] Invalid input for guild name.`);
-        if (!client) return module.exports.logError(`[Utils] [findGuild] Invalid input for client.`);
+        if (!name) return module.exports.logError(`[Utils] [findGuild] Ungültige Eingabe für Gildenname.`);
+        if (!client) return module.exports.logError(`[Utils] [findGuild] Ungültige Eingabe für Client.`);
         if (typeof name == "bigint" || typeof name == "number") name = name.toString();
 
         let returnObject = false;
         const guild = client.guilds.cache.find((g) => g.name.toLowerCase() === name.toLowerCase() || g.id === name);
 
         if (guild) returnObject = guild;
-        else if (notify) module.exports.logError(`[Utils] [findGuild] ${chalk.bold(name)} guild was not found.`);
+        else if (notify) module.exports.logError(`[Utils] [findGuild] ${chalk.bold(name)} Gilde nicht gefunden.`);
 
         return returnObject;
     },
@@ -345,8 +345,8 @@ module.exports = {
      * @returns {Boolean | void}
      */
     hasRole: (member, name, notify = true) => {
-        if (!member) return module.exports.logError(`[Utils] [hasRole] Invalid input for ${chalk.bold("member")}.`);
-        if (!name) return module.exports.logError(`[Utils] [hasRole] Invalid input for role ${chalk.bold("name")}.`);
+        if (!member) return module.exports.logError(`[Utils] [hasRole] Ungültige Eingabe für ${chalk.bold("member")}.`);
+        if (!name) return module.exports.logError(`[Utils] [hasRole] Ungültige Eingabe für Rolle ${chalk.bold("name")}.`);
         if (typeof name == "bigint" || typeof name == "number") name = name.toString();
 
         let permissions = [];
@@ -364,7 +364,7 @@ module.exports = {
                 if (member.roles.cache.has(role.id)) permissions.push(true);
                 else permissions.push(false);
             } else permissions.push(false);
-        } else module.exports.logError(`[Utils] [hasRole] Invalid type of ${chalk.bold("name")} property.`);
+        } else module.exports.logError(`[Utils] [hasRole] Ungültiger Typ der Eigenschaft ${chalk.bold("name")}.`);
 
         return permissions.includes(true);
     },
@@ -374,8 +374,8 @@ module.exports = {
      * @returns {Discord.GuildMember | void}
      */
     parseUser: (argument, guild) => {
-        if (!argument) return module.exports.logError(`[Utils] [parseUser] Invalid input ${chalk.bold("argument")}.`);
-        if (!guild) return module.exports.logError(`[Utils] [parseUser] Invalid input for ${chalk.bold("guild")}.`);
+        if (!argument) return module.exports.logError(`[Utils] [parseUser] Ungültige Eingabe ${chalk.bold("argument")}.`);
+        if (!guild) return module.exports.logError(`[Utils] [parseUser] Ungültige Eingabe für ${chalk.bold("guild")}.`);
         if (typeof argument == "bigint" || typeof argument == "number") argument = argument.toString();
 
         if (argument && guild) {
@@ -397,8 +397,8 @@ module.exports = {
      * @returns {Discord.GuildMember | void}
      */
     parseUserFromMessage: (message, argument, messageMember = true) => {
-        if (!message) return module.exports.logError(`[Utils] [parseUserFromMessage] Invalid input ${chalk.bold("message")}.`);
-        if (!argument) return module.exports.logError(`[Utils] [parseUserFromMessage] Invalid input ${chalk.bold("argument")}.`);
+        if (!message) return module.exports.logError(`[Utils] [parseUserFromMessage] Ungültige Eingabe ${chalk.bold("message")}.`);
+        if (!argument) return module.exports.logError(`[Utils] [parseUserFromMessage] Ungültige Eingabe ${chalk.bold("argument")}.`);
         if (typeof argument == "bigint" || typeof argument == "number") argument = argument.toString();
 
         if (messageMember) return (message.mentions.members.first() || module.exports.parseUser(argument, message.guild) || message.member);
@@ -441,7 +441,7 @@ module.exports = {
     parseSlashArgs: function (options) {
         let args = {};
         if (typeof options !== "object" && options.length <= 0)
-            return module.exports.logError("[Utils] [parseSlashArgs] Invalid Options were provided.");
+            return module.exports.logError("[Utils] [parseSlashArgs] Es wurden ungültige Optionen angegeben.");
 
         options.forEach((opt) => {
             let { type, value, name } = opt;
@@ -460,7 +460,7 @@ module.exports = {
                 if (opt.user) args[name].user = opt.user;
                 if (opt.member) args[name].member = opt.member;
                 if (opt.role) args[name].role;
-            } else return module.exports.logWarning("[Utils] [parseSlashArgs] Invalid Choice Type. Type: " + type);
+            } else return module.exports.logWarning("[Utils] [parseSlashArgs] Ungültige Auswahl Typ. Type: " + type);
 
         });
         return args;
@@ -478,14 +478,14 @@ module.exports = {
         await interaction.client.api.interactions(interaction.id, interaction.token).callback.post({
             data: { type: 6 },
         }).then((res) => resolve(res)).catch((err) => {
-            if (err.message === "Unknown interaction")
+            if (err.message === "Unbekannte Interaktion")
                 resolve(undefined);
             else reject(err);
         });
     }),
     createMultipleConfigs: async (configs, addonName) => new Promise(async (resolve, reject) => {
         if (typeof configs !== "object" && Object.keys(configs).length <= 0) {
-            module.exports.logError("[Utils] [createMultipleConfigs] Invalid Configs were provided.");
+            module.exports.logError("[Utils] [createMultipleConfigs] Es wurden ungültige Configs bereitgestellt.");
             resolve({});
         }
 
@@ -513,8 +513,8 @@ module.exports = {
      * @returns {String}
      */
     bytesToSize: (bytes, seperator = " ") => {
-        // This code is not written by any collaborators from BrayanBot
-        // This code was taken from github gist
+        // Dieser Code wurde nicht von Mitarbeitern von BrayanBot geschrieben.
+        // Dieser Code wurde von github gist genommen
         // -> https://gist.github.com/lanqy/5193417?permalink_comment_id=2793883#gistcomment-2793883
         const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
 
