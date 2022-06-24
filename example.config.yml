@@ -2,9 +2,9 @@ Settings:
   Token: "BOT-TOKEN"
   Prefix: "-"
   Storage: "database.db"
-  # Enabling DevMode will reset all addon configurations.
+  # Wenn Sie den DevMode aktivieren, werden alle Addon-Konfigurationen zurückgesetzt.
   DevMode: false 
-  # Verbose mode enables additional debug messages to be shown on the startup log.
+  # Im ausführlichen Modus können zusätzliche Debug-Meldungen im Startprotokoll angezeigt werden.
   Verbose: true 
 
 Embeds:
