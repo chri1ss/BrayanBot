@@ -25,7 +25,7 @@ const
         }), guild = bot.guilds.cache.first();
 
     if (!guild) {
-        Utils.logError(`Currently in ${chalk.bold(0)} servers. | Bot is required to be in atleast ${chalk.bold(1)} server. Use the link below to invite the bot into your server.`)
+        Utils.logError(`Derzeit auf ${chalk.bold(0)} server. | Der Bot muss sich mindestens auf ${chalk.bold(1)} servern befinden. Verwenden Sie den unten stehenden Link, um den Bot auf Ihren Server einzuladen.`)
         Utils.logError(chalk.blue(`https://discord.com/api/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=bot%20applications.commands`))
         process.exit(0)
     }
@@ -45,7 +45,7 @@ const
       
     }).catch(e => {
         if (e.code == 50001) {
-            Utils.logWarning(`[SlashCommands] \"${chalk.bold(`application.commands`)}\" scope wasn't selected while inviting the bot. Please use the below link to re-invite your bot.`)
+            Utils.logWarning(`[SlashCommands] \"${chalk.bold(`application.commands`)}\" Der Funktionsbereich wurde beim Einladen des Bots nicht ausgewählt. Bitte verwenden Sie den unten stehenden Link, um Ihren Bot erneut einzuladen.`)
             Utils.logWarning(`[SlashCommands] ${chalk.blue(chalk.underline(chalk.bold(`https://discord.com/api/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=bot%20applications.commands`)))}`)
         } else {
             Utils.logError(e.stack);
@@ -73,21 +73,21 @@ const
                     if (newVersion[i] > curVersion[i]) versions[i] = false
 
                 if (versions[0] == false) {
-                    Utils.logWarning(`You are running on older version of ${chalk.bold("BrayanBot")}, please update your bot to apply any ${chalk.bold("Major")} changes.`)
+                    Utils.logWarning(`Du arbeitest mit einer älteren Version von ${chalk.bold("BrayanBot")}, Bitte aktualisieren Sie Ihren Bot, um ${chalk.bold("Major")} Änderungen zu übernehmen.`)
                 } else if (versions[1] == false) {
-                    Utils.logWarning(`You are running on older version of ${chalk.bold("BrayanBot")}, please update your bot to apply any ${chalk.bold("Minor")} changes.`)
+                    Utils.logWarning(`Du arbeitest mit einer älteren Version von ${chalk.bold("BrayanBot")}, Bitte aktualisieren Sie Ihren Bot, um ${chalk.bold("Minor")} Änderungen zu übernehmen.`)
                 } else if (versions[2] == false) {
-                    Utils.logWarning(`You are running on older version of ${chalk.bold("BrayanBot")}, please update your bot to apply any ${chalk.bold("Patch")} changes.`)
+                    Utils.logWarning(`Du arbeitest mit einer älteren Version von ${chalk.bold("BrayanBot")}, Bitte aktualisieren Sie Ihren Bot, um ${chalk.bold("Patch")} Änderungen zu übernehmen.`)
                 } else if (versions[0] == true && versions[1] == true && versions[2] == true) {
-                    Utils.logInfo(`You are running latest version of ${chalk.bold("BrayanBot")}!`)
+                    Utils.logInfo(`Du arbeitest mit einer älteren Version von ${chalk.bold("BrayanBot")}!`)
                 }
             }
         }
     }).catch(async (e) => {
         if (e.response && e.response.status == 404) {
-            Utils.logWarning(`Unable to fetch latest BrayanBot releases.`)
+            Utils.logWarning(`Die neuesten BrayanBot-Versionen können nicht abgerufen werden.`)
         } else if (e.response && e.response.data && e.response.data.message.includes("rate limit")) {
-            Utils.logWarning("Skipping Github Version check due to rate limits.")
+            Utils.logWarning("Überspringen der Github-Versionsprüfung aufgrund von Ratelimits.")
         } else {
             Utils.logError(`[Update-Checker] ${e}`)
         }
@@ -112,13 +112,13 @@ const
                 Utils.logDebug(`${files.length} addons found.`);
             }
             else { // TODO: make this warning error specific
-                Utils.logWarning(`Addon directory was not found. Make sure the bot can create directories or access the Addons directory.`); 
+                Utils.logWarning(`Addon-Verzeichnis wurde nicht gefunden. Stelle sicher, dass der Bot Verzeichnisse erstellen oder auf das Addons-Verzeichnis zugreifen kann.`);
             }
         }
     bot.guilds.cache.size > 1
-        ? Utils.logWarning(`Currently in ${chalk.bold(bot.guilds.cache.size)} servers. | ${chalk.hex("##ff596d")(`BrayanBot is not made for multiple servers.`)}`)
-        : Utils.logInfo(`Currently in ${chalk.bold(bot.guilds.cache.size)} server.`);
-    await Utils.logInfo(`Bot Ready!`);
+        ? Utils.logWarning(`Derzeit in ${chalk.bold(bot.guilds.cache.size)} servers. | ${chalk.hex("##ff596d")(`BrayanBot ist nicht für mehrere Server ausgelegt.`)}`)
+        : Utils.logInfo(`Derzeit in ${chalk.bold(bot.guilds.cache.size)} server.`);
+    await Utils.logInfo(`Bot Bereit!`);
 };
 
 module.exports.once = true;
