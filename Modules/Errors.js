@@ -1,14 +1,14 @@
 const fs = require('fs'),
     chalk = require("chalk"),
     consoleIgnore = [
-        "DiscordAPIError: Unknown Role",
-        "DiscordAPIError: Unknown Member",
-        "DiscordAPIError: Unknown Message",
-        "DiscordAPIError: Unknown Channel"
+        "DiscordAPIError: Unbekannte Rolle",
+        "DiscordAPIError: Unbekanntes Mitglied",
+        "DiscordAPIError: Unbekannte Nachricht",
+        "DiscordAPIError: Unbekannter Kanal"
     ],
     knownErrors = [
-        "Error: ENOENT: no such file or directory, open 'config.yml'",
-        "Error [TOKEN_INVALID]: An invalid token was provided."
+        "Error: ENOENT: keine solche Datei oder Verzeichnis, öffne 'config.yml'",
+        "Error [TOKEN_INVALID]: Es wurde ein ungültiges Token angegeben."
     ]
 let log = {
     errorStart: chalk.hex("#ff5e5e").bold("\n[ERROR START]"),
@@ -17,8 +17,8 @@ let log = {
 }
 module.exports = (shortError, fullError = "") => {
     function sendMessage() {
-        if (shortError.includes(`config.yml`)) return console.log(log.warn, `Couldn't find config.yml. Please follow our setup guide! https://brayanbot.dev/docs/setup/hosting/windows`)
-        if (shortError.includes(`TOKEN_INVALID`)) return console.log(log.warn, `Your bot token is incorrect. Please update in config.yml`)
+        if (shortError.includes(`config.yml`)) return console.log(log.warn, `Die Datei config.yml konnte nicht gefunden werden. Bitte folgen Sie unserer Installationsanleitung! https://brayanbot.dev/docs/setup/hosting/windows`)
+        if (shortError.includes(`TOKEN_INVALID`)) return console.log(log.warn, `Ihr Bot-Token ist falsch. Bitte aktualisieren Sie in der config.yml`)
 
     }
     if (!shortError) return;
