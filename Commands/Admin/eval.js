@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
     if (!input) return message.reply(Utils.setupMessage({
         configPath: lang.Presets.Error,
         variables: [
-            { searchFor: /{error}/g, replaceWith: "You need to define code, which should be executed!" },
+            { searchFor: /{error}/g, replaceWith: "Du musst den Code definieren, der ausgeführt werden soll!" },
             ...Utils.userVariables(message.member),
             ...Utils.botVariables(bot),
         ],
@@ -30,7 +30,7 @@ module.exports.run = async (bot, message, args) => {
     if (input.includes("token")) return message.reply(Utils.setupMessage({
         configPath: lang.Presets.Error,
         variables: [
-            { searchFor: /{error}/g, replaceWith: "You can't execute code, which includes bot token!" },
+            { searchFor: /{error}/g, replaceWith: "Du kannst keinen Code ausführen, der Bot-Token enthält!" },
             ...Utils.userVariables(message.member),
             ...Utils.botVariables(bot),
         ],
@@ -45,7 +45,7 @@ module.exports.run = async (bot, message, args) => {
     if (typeof output != "map" && output.toString().includes(bot.token)) return message.reply(Utils.setupMessage({
         configPath: lang.Presets.Error,
         variables: [
-            { searchFor: /{error}/g, replaceWith: "You can't execute code, which includes bot token!" },
+            { searchFor: /{error}/g, replaceWith: "Du kannst keinen Code ausführen, der Bot-Token enthält!" },
             ...Utils.userVariables(message.member),
             ...Utils.botVariables(bot),
         ],
@@ -73,7 +73,7 @@ module.exports.runSlash = async (bot, interaction) => {
     if (!input) return interaction.reply(Utils.setupMessage({
         configPath: lang.Presets.Error,
         variables: [
-            { searchFor: /{error}/g, replaceWith: "You need to define code, which should be executed!" },
+            { searchFor: /{error}/g, replaceWith: "Du musst den Code definieren, der ausgeführt werden soll!" },
             ...Utils.userVariables(interaction.member),
             ...Utils.botVariables(bot),
         ],
@@ -82,7 +82,7 @@ module.exports.runSlash = async (bot, interaction) => {
     if (input.includes("bot.token")) return interaction.reply(Utils.setupMessage({
         configPath: lang.Presets.Error,
         variables: [
-            { searchFor: /{error}/g, replaceWith: "You can't execute code, which includes bot token!" },
+            { searchFor: /{error}/g, replaceWith: "Du kannst keinen Code ausführen, der Bot-Token enthält!" },
             ...Utils.userVariables(interaction.member),
             ...Utils.botVariables(bot),
         ],
@@ -97,7 +97,7 @@ module.exports.runSlash = async (bot, interaction) => {
     if (typeof output != "map" && output.toString().includes(bot.token)) return interaction.reply(Utils.setupMessage({
         configPath: lang.Presets.Error,
         variables: [
-            { searchFor: /{error}/g, replaceWith: "You can't execute code, which includes bot token!" },
+            { searchFor: /{error}/g, replaceWith: "Du kannst keinen Code ausführen, der Bot-Token enthält!" },
             ...Utils.userVariables(interaction.member),
             ...Utils.botVariables(bot),
         ],
