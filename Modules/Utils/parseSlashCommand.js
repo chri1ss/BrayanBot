@@ -33,11 +33,11 @@ const commandStructure = {
 module.exports = (data) => {
     const Utils = require("../Utils");
     if (!data) {
-        Utils.logError(`[Utils] [SlashCommandCreator] ${chalk.bold("Data")} not provided.`);
+        Utils.logError(`[Utils] [SlashCommandCreator] ${chalk.bold("Data")} nicht vorhanden.`);
     } else if (!data.Name) {
-        Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Name")} is required to build Slash Command.`);
+        Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Name")} ist für die Erstellung von Slash Command erforderlich.`);
     } else if (!data.Description) {
-        Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Description")} is required to build Slash Command.`);
+        Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Description")} ist für die Erstellung von Slash Command erforderlich.`);
     } else {
         const { Name, Description, Options } = data;
         let command = {
@@ -46,8 +46,8 @@ module.exports = (data) => {
             options: [],
             default_permission: false,
         };
-        if (!Name) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Name")} is required to build Slash Command.`);
-        if (!Description) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Description")} is required to build Slash Command.`);
+        if (!Name) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Name")} ist für die Erstellung von Slash Command erforderlich.`);
+        if (!Description) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Description")} ist für die Erstellung von Slash Command erforderlich.`);
 
         if (Name && Description) {
             command.name = Name.toLowerCase();
@@ -78,8 +78,8 @@ module.exports = (data) => {
                 for (let index = 0; index < Options.length; index++) {
                     const option = Options[index];
                     if (option.Type && optionTypes.includes(option.Type.toLowerCase())) {
-                        if (!option.Name) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Name")} is required to build Slash Command's option.`);
-                        if (!option.Description) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Description")} is required to build Slash Command's option.`);
+                        if (!option.Name) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Name")} ist für die Erstellung von Slash Command erforderlich.`);
+                        if (!option.Description) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Description")} ist für die Erstellung von Slash Command erforderlich.`);
 
                         if (option.Name && option.Description) {
                             let optionData = {
@@ -112,7 +112,7 @@ module.exports = (data) => {
                                     optionData.type = 9;
                                 }
                             } else {
-                                Utils.logError(`[Utils] [SlashCommandCreator] Invalid ${chalk.bold("Option.Type")} property.`);
+                                Utils.logError(`[Utils] [SlashCommandCreator] Ungültige Eigenschaft ${chalk.bold("Option.Type")}.`);
                             }
 
                             if (optionData.type == 1) {
@@ -127,8 +127,8 @@ module.exports = (data) => {
                                 }
                             } else {
                                 if (option.Choices && Array.isArray(option.Choices) && ["string", 3, "integer", 4, "number", 10,].includes(option.Type.toLowerCase())) option.Choices.forEach((choice) => {
-                                    if (!choice.Name) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Name")} is required to build Slash Command's option's choice.`);
-                                    if (!choice.Value) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Value")} is required to build Slash Command's option's choice.`);
+                                    if (!choice.Name) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Name")} ist erforderlich, um die Option Slash Command's option's choice zu erstellen.`);
+                                    if (!choice.Value) Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Value")} ist erforderlich, um die Option Slash Command's option's choice zu erstellen.`);
                                     if (choice.Name && choice.Value) optionData.choices.push({
                                         name: choice.Name,
                                         value: typeof choice.Value == "string" ? choice.Value.toLowerCase() : parseInt(choice.Value),
@@ -157,7 +157,7 @@ module.exports = (data) => {
                                             optionData.channel_types.push(13);
                                         }
                                     } else {
-                                        Utils.logError(`[Utils] [SlashCommandCreator] Invalid ${chalk.bold("ChannelType")} property.`);
+                                        Utils.logError(`[Utils] [SlashCommandCreator] Ungültige Eigenschaft ${chalk.bold("ChannelType")}.`);
                                     }
                                 });
                             }
@@ -165,9 +165,9 @@ module.exports = (data) => {
                             command.options.push(optionData);
                         }
                     } else if (!option.Type) {
-                        Utils.logError(`[Utils] [SlashCommandCreator] A ${chalk.bold("Type")} is required to build Slash Command's Option`);
+                        Utils.logError(`[Utils] [SlashCommandCreator] Ein ${chalk.bold("Type")} ist erforderlich, um die Option von Slash Command zu erstellen`);
                     } else {
-                        Utils.logError(`[Utils] [SlashCommandCreator] Invalid ${chalk.bold("Type")} property.`);
+                        Utils.logError(`[Utils] [SlashCommandCreator] Ungültige Eigenschaft ${chalk.bold("Typ")}.`);
                     }
                 }
             }
